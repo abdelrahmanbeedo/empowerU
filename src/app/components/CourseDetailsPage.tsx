@@ -4,116 +4,19 @@ import {
   ChevronDown, ChevronRight, ArrowRight, Sparkles, Target, TrendingUp 
 } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { getPathwayById, getSuggestedPathways } from "../data/pathways";
+import type { NavigateOptions } from "../App";
 
 interface CourseDetailsPageProps {
-  onNavigate: (page: string) => void;
+  onNavigate: (page: string, options?: NavigateOptions) => void;
+  courseId: number;
 }
 
-export function CourseDetailsPage({ onNavigate }: CourseDetailsPageProps) {
+export function CourseDetailsPage({ onNavigate, courseId }: CourseDetailsPageProps) {
   const [expandedModule, setExpandedModule] = useState<number | null>(0);
 
-  const course = {
-    title: "Effective Communication",
-    instructor: {
-      name: "Sarah Johnson",
-      title: "Communication Expert",
-      bio: "20+ years of experience in corporate training",
-      image: "https://images.unsplash.com/photo-1581065178047-8ee15951ede6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHByb2Zlc3Npb25hbCUyMHdvbWFuJTIwcG9ydHJhaXR8ZW58MXx8fHwxNzcwMzQzOTQ5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    },
-    image: "https://images.unsplash.com/photo-1758691736821-f1a600c0c3f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21tdW5pY2F0aW9uJTIwc2tpbGxzJTIwcHJlc2VudGF0aW9ufGVufDF8fHx8MTc3MDQwNTkwOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    rating: 4.8,
-    students: 2341,
-    duration: "6 weeks",
-    xp: 500,
-    difficulty: "Beginner",
-    overview: "Master the art of clear and impactful communication in professional settings. This comprehensive course will teach you how to express ideas effectively, listen actively, and build stronger relationships through better communication.",
-    objectives: [
-      "Speak confidently in meetings and presentations",
-      "Write clear and persuasive emails",
-      "Practice active listening techniques",
-      "Handle difficult conversations professionally",
-      "Build rapport with diverse audiences",
-    ],
-    modules: [
-      {
-        title: "Introduction to Communication",
-        lessons: [
-          { title: "What Makes Communication Effective?", type: "video", duration: "12 min" },
-          { title: "Common Communication Barriers", type: "video", duration: "15 min" },
-          { title: "Self-Assessment Quiz", type: "quiz", duration: "10 min" },
-        ],
-      },
-      {
-        title: "Verbal Communication",
-        lessons: [
-          { title: "Clarity and Conciseness", type: "video", duration: "18 min" },
-          { title: "Tone and Voice Modulation", type: "video", duration: "14 min" },
-          { title: "Public Speaking Basics", type: "video", duration: "20 min" },
-          { title: "Practice Exercise: Elevator Pitch", type: "activity", duration: "30 min" },
-        ],
-      },
-      {
-        title: "Written Communication",
-        lessons: [
-          { title: "Email Etiquette", type: "video", duration: "16 min" },
-          { title: "Professional Report Writing", type: "video", duration: "22 min" },
-          { title: "Writing Assignment", type: "activity", duration: "45 min" },
-        ],
-      },
-      {
-        title: "Active Listening",
-        lessons: [
-          { title: "The Art of Listening", type: "video", duration: "15 min" },
-          { title: "Empathetic Responses", type: "video", duration: "13 min" },
-          { title: "Role-Play Exercise", type: "activity", duration: "25 min" },
-        ],
-      },
-      {
-        title: "Non-Verbal Communication",
-        lessons: [
-          { title: "Body Language Basics", type: "video", duration: "17 min" },
-          { title: "Reading Social Cues", type: "video", duration: "14 min" },
-          { title: "Practice Quiz", type: "quiz", duration: "15 min" },
-        ],
-      },
-      {
-        title: "Final Project & Certification",
-        lessons: [
-          { title: "Course Review", type: "video", duration: "10 min" },
-          { title: "Final Presentation", type: "activity", duration: "60 min" },
-          { title: "Course Feedback", type: "quiz", duration: "5 min" },
-        ],
-      },
-    ],
-    aiInsights: ["Communication", "Leadership", "Empathy"],
-  };
-
-  const suggestedCourses = [
-    {
-      id: 2,
-      title: "Leadership Essentials",
-      instructor: "Michael Chen",
-      xp: 750,
-      image: "https://images.unsplash.com/photo-1624555130296-e551faf8969b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsZWFkZXJzaGlwJTIwdGVhbXdvcmslMjBtZWV0aW5nfGVufDF8fHx8MTc3MDQwNTkwOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      rating: 4.9,
-    },
-    {
-      id: 3,
-      title: "Emotional Intelligence",
-      instructor: "Dr. Emily Rodriguez",
-      xp: 600,
-      image: "https://images.unsplash.com/photo-1704793602305-78afd16cc043?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbW90aW9uYWwlMjBpbnRlbGxpZ2VuY2UlMjBlbXBhdGh5fGVufDF8fHx8MTc3MDQwNTkxMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      rating: 4.7,
-    },
-    {
-      id: 4,
-      title: "Team Collaboration",
-      instructor: "David Park",
-      xp: 450,
-      image: "https://images.unsplash.com/photo-1739298061707-cefee19941b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWFtd29yayUyMGNvbGxhYm9yYXRpb24lMjBvZmZpY2V8ZW58MXx8fHwxNzcwMzAxMzAxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      rating: 4.6,
-    },
-  ];
+  const course = getPathwayById(courseId) ?? getPathwayById(1)!;
+  const suggestedCourses = getSuggestedPathways(courseId);
 
   const totalLessons = course.modules.reduce((acc, module) => acc + module.lessons.length, 0);
   const totalDuration = "8 hours 45 minutes";
@@ -359,7 +262,7 @@ export function CourseDetailsPage({ onNavigate }: CourseDetailsPageProps) {
               <div
                 key={suggestedCourse.id}
                 className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer group"
-                onClick={() => onNavigate("course-details")}
+                onClick={() => onNavigate("course-details", { courseId: suggestedCourse.id })}
               >
                 <div className="relative h-40 overflow-hidden">
                   <ImageWithFallback
@@ -377,7 +280,7 @@ export function CourseDetailsPage({ onNavigate }: CourseDetailsPageProps) {
                     <span className="text-sm font-semibold">{suggestedCourse.rating}</span>
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-1">{suggestedCourse.title}</h3>
-                  <p className="text-sm text-gray-600">by {suggestedCourse.instructor}</p>
+                  <p className="text-sm text-gray-600">by {suggestedCourse.instructor.name}</p>
                 </div>
               </div>
             ))}

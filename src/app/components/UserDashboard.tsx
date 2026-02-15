@@ -3,9 +3,10 @@ import {
   ArrowRight, Brain, Trophy, Zap 
 } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import type { NavigateOptions } from "../App";
 
 interface UserDashboardProps {
-  onNavigate: (page: string) => void;
+  onNavigate: (page: string, options?: NavigateOptions) => void;
 }
 
 export function UserDashboard({ onNavigate }: UserDashboardProps) {
@@ -94,7 +95,7 @@ export function UserDashboard({ onNavigate }: UserDashboardProps) {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Welcome Header */}
-        <div className="bg-gradient-to-r from-sky-600 to-blue-500 rounded-2xl p-8 mb-8 text-white">
+        <div className="rounded-2xl p-8 mb-8 text-white" style={{ background: "linear-gradient(135deg, #2563eb 0%, #0891b2 100%)" }}>
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="flex items-center gap-6">
               <ImageWithFallback
@@ -151,7 +152,7 @@ export function UserDashboard({ onNavigate }: UserDashboardProps) {
                   <div
                     key={course.id}
                     className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer"
-                    onClick={() => onNavigate("course-details")}
+                    onClick={() => onNavigate("course-details", { courseId: course.id })}
                   >
                     <div className="flex gap-4">
                       <ImageWithFallback
@@ -186,7 +187,7 @@ export function UserDashboard({ onNavigate }: UserDashboardProps) {
                 ))}
               </div>
               <button 
-                onClick={() => onNavigate("course-details")}
+                onClick={() => onNavigate("course-details", { courseId: ongoingCourses[0]?.id ?? 1 })}
                 className="w-full mt-4 px-6 py-3 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition-colors font-semibold flex items-center justify-center gap-2"
               >
                 Continue Learning
@@ -290,7 +291,7 @@ export function UserDashboard({ onNavigate }: UserDashboardProps) {
                 <h2 className="text-xl font-bold text-gray-900">Leaderboard</h2>
                 <TrendingUp className="w-5 h-5 text-sky-600" />
               </div>
-              <p className="text-sm text-gray-600 mb-4">Top learners this week</p>
+              <p className="text-sm text-gray-600 mb-4 font-secondary">Last week&apos;s top performers</p>
               <div className="space-y-3">
                 {leaderboard.map((entry) => (
                   <div
@@ -332,13 +333,13 @@ export function UserDashboard({ onNavigate }: UserDashboardProps) {
             </div>
 
             {/* Quick Actions */}
-            <div className="bg-gradient-to-br from-sky-600 to-blue-500 rounded-xl p-6 text-white">
+            <div className="rounded-xl p-6 text-white" style={{ background: "linear-gradient(135deg, #2563eb 0%, #0891b2 100%)" }}>
               <h3 className="font-semibold mb-2">Keep the momentum going!</h3>
               <p className="text-sky-100 text-sm mb-4">
                 Complete one more lesson today to maintain your streak
               </p>
               <button 
-                onClick={() => onNavigate("course-details")}
+                onClick={() => onNavigate("course-details", { courseId: ongoingCourses[0]?.id ?? 1 })}
                 className="w-full px-6 py-3 bg-white text-sky-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold"
               >
                 Start Next Lesson

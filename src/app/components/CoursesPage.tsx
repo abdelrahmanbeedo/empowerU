@@ -1,9 +1,18 @@
 import { useState } from "react";
-import { Search, Filter, Star, Clock, TrendingUp, ChevronDown } from "lucide-react";
+import { Search, Filter, Star, Clock, TrendingUp, ChevronDown, ChevronRight, FileText } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import type { NavigateOptions } from "../App";
+
+const CAREER_PATHWAYS = [
+  { id: 1, name: "Business Analyst" },
+  { id: 2, name: "Market Research Analyst" },
+  { id: 3, name: "Technical Sales Representative" },
+  { id: 4, name: "Project / Operations Coordinator" },
+  { id: 5, name: "Marketing Coordinator" },
+];
 
 interface CoursesPageProps {
-  onNavigate: (page: string) => void;
+  onNavigate: (page: string, options?: NavigateOptions) => void;
 }
 
 export function CoursesPage({ onNavigate }: CoursesPageProps) {
@@ -15,111 +24,72 @@ export function CoursesPage({ onNavigate }: CoursesPageProps) {
   const courses = [
     {
       id: 1,
-      title: "Effective Communication",
+      title: "Business Analyst",
       instructor: "Sarah Johnson",
-      category: "Communication",
-      difficulty: "Beginner",
-      duration: "6 weeks",
-      xp: 500,
-      image: "https://images.unsplash.com/photo-1758691736821-f1a600c0c3f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21tdW5pY2F0aW9uJTIwc2tpbGxzJTIwcHJlc2VudGF0aW9ufGVufDF8fHx8MTc3MDQwNTkwOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      rating: 4.8,
-      students: 2341,
-      description: "Master the art of clear and impactful communication in professional settings.",
-    },
-    {
-      id: 2,
-      title: "Leadership Essentials",
-      instructor: "Michael Chen",
-      category: "Leadership",
+      category: "Business",
       difficulty: "Intermediate",
       duration: "8 weeks",
       xp: 750,
-      image: "https://images.unsplash.com/photo-1624555130296-e551faf8969b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsZWFkZXJzaGlwJTIwdGVhbXdvcmslMjBtZWV0aW5nfGVufDF8fHx8MTc3MDQwNTkwOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       rating: 4.9,
       students: 1876,
-      description: "Develop core leadership skills to inspire and guide your team to success.",
+      description: "Analyze requirements, model processes, and bridge business needs with solutions.",
+    },
+    {
+      id: 2,
+      title: "Market Research Analyst",
+      instructor: "Dr. Emily Rodriguez",
+      category: "Research",
+      difficulty: "Intermediate",
+      duration: "6 weeks",
+      xp: 600,
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      rating: 4.8,
+      students: 1542,
+      description: "Gather data, run analysis, and deliver insights that drive strategy.",
     },
     {
       id: 3,
-      title: "Emotional Intelligence",
-      instructor: "Dr. Emily Rodriguez",
-      category: "Personal Development",
-      difficulty: "Beginner",
-      duration: "5 weeks",
-      xp: 600,
-      image: "https://images.unsplash.com/photo-1704793602305-78afd16cc043?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbW90aW9uYWwlMjBpbnRlbGxpZ2VuY2UlMjBlbXBhdGh5fGVufDF8fHx8MTc3MDQwNTkxMHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      rating: 4.7,
-      students: 1542,
-      description: "Enhance your ability to understand and manage emotions effectively.",
-    },
-    {
-      id: 4,
-      title: "Team Collaboration",
-      instructor: "David Park",
-      category: "Teamwork",
-      difficulty: "Beginner",
-      duration: "4 weeks",
-      xp: 450,
-      image: "https://images.unsplash.com/photo-1739298061707-cefee19941b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWFtd29yayUyMGNvbGxhYm9yYXRpb24lMjBvZmZpY2V8ZW58MXx8fHwxNzcwMzAxMzAxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      rating: 4.6,
-      students: 1234,
-      description: "Learn to work effectively in teams and build strong collaborative relationships.",
-    },
-    {
-      id: 5,
-      title: "Time Management Mastery",
-      instructor: "Lisa Anderson",
-      category: "Productivity",
-      difficulty: "Beginner",
-      duration: "3 weeks",
-      xp: 400,
-      image: "https://images.unsplash.com/photo-1737505191896-8e3cb72e4df9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aW1lJTIwbWFuYWdlbWVudCUyMHByb2R1Y3Rpdml0eXxlbnwxfHx8fDE3NzAzMDk1OTh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      rating: 4.5,
-      students: 987,
-      description: "Master time management techniques to boost productivity and reduce stress.",
-    },
-    {
-      id: 6,
-      title: "Critical Thinking",
-      instructor: "Prof. James Wilson",
-      category: "Problem Solving",
+      title: "Technical Sales Representative",
+      instructor: "Michael Chen",
+      category: "Sales",
       difficulty: "Intermediate",
       duration: "6 weeks",
       xp: 650,
-      image: "https://images.unsplash.com/photo-1765851802822-da3b17de20a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcml0aWNhbCUyMHRoaW5raW5nJTIwcHJvYmxlbSUyMHNvbHZpbmd8ZW58MXx8fHwxNzcwNDA2MDAyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      rating: 4.9,
-      students: 1654,
-      description: "Develop analytical skills to solve complex problems and make better decisions.",
+      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
+      rating: 4.7,
+      students: 1234,
+      description: "Sell technical products and services while building lasting client relationships.",
     },
     {
-      id: 7,
-      title: "Negotiation Skills",
-      instructor: "Rachel Kim",
-      category: "Communication",
-      difficulty: "Advanced",
+      id: 4,
+      title: "Project / Operations Coordinator",
+      instructor: "Lisa Anderson",
+      category: "Operations",
+      difficulty: "Beginner",
       duration: "7 weeks",
-      xp: 800,
-      image: "https://images.unsplash.com/photo-1745847768380-2caeadbb3b71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZWdvdGlhdGlvbiUyMGJ1c2luZXNzJTIwaGFuZHNoYWtlfGVufDF8fHx8MTc3MDQwNjAwMnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      xp: 700,
+      image: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       rating: 4.8,
-      students: 1432,
-      description: "Learn advanced negotiation strategies for professional and personal success.",
+      students: 1654,
+      description: "Coordinate projects and day-to-day operations for smooth delivery.",
     },
     {
-      id: 8,
-      title: "Conflict Resolution",
-      instructor: "Dr. Maria Santos",
-      category: "Leadership",
-      difficulty: "Intermediate",
+      id: 5,
+      title: "Marketing Coordinator",
+      instructor: "David Park",
+      category: "Marketing",
+      difficulty: "Beginner",
       duration: "5 weeks",
       xp: 550,
-      image: "https://images.unsplash.com/photo-1653669487404-09c3617c2b6c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b3VuZyUyMGRpdmVyc2UlMjBzdHVkZW50cyUyMGxlYXJuaW5nJTIwb25saW5lfGVufDF8fHx8MTc3MDQwNTkwOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
       rating: 4.7,
-      students: 1098,
-      description: "Master techniques to resolve workplace conflicts and build harmonious teams.",
+      students: 1420,
+      description: "Support campaigns, content, and marketing operations from planning to execution.",
     },
   ];
 
-  const categories = ["all", "Communication", "Leadership", "Personal Development", "Teamwork", "Productivity", "Problem Solving"];
+  const categories = ["all", "Business", "Research", "Sales", "Operations", "Marketing"];
   const difficulties = ["all", "Beginner", "Intermediate", "Advanced"];
 
   const filteredCourses = courses.filter((course) => {
@@ -133,14 +103,34 @@ export function CoursesPage({ onNavigate }: CoursesPageProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Banner */}
-      <div className="bg-gradient-to-r from-sky-600 to-blue-500 text-white py-16">
+      <div className="text-white py-16" style={{ background: "linear-gradient(135deg, #2563eb 0%, #0891b2 100%)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold mb-4">Explore Our Courses</h1>
-          <p className="text-xl text-sky-100">Learn Anytime, Grow Continuously</p>
+          <h1 className="text-4xl font-bold mb-4">Explore Pathways &amp; Courses</h1>
+          <p className="text-xl text-white/90 font-secondary">Learn anytime, grow continuously</p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Career Pathways list (arrow + document icon) */}
+        <div className="bg-white rounded-xl shadow-md p-6 mb-8 border border-gray-100">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Career pathways</h2>
+          <ul className="space-y-1">
+            {CAREER_PATHWAYS.map((pathway) => (
+              <li key={pathway.id}>
+                <button
+                  type="button"
+                  onClick={() => onNavigate("course-details", { courseId: pathway.id })}
+                  className="w-full flex items-center gap-3 py-3 px-2 rounded-lg text-left text-gray-800 hover:bg-gray-50 transition-colors group"
+                >
+                  <ChevronRight className="w-5 h-5 text-gray-500 flex-shrink-0 group-hover:text-sky-600 transition-colors" />
+                  <FileText className="w-5 h-5 text-gray-400 flex-shrink-0" />
+                  <span className="font-medium">{pathway.name}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         {/* Search and Filter Bar */}
         <div className="bg-white rounded-lg shadow-md p-4 mb-8">
           <div className="flex flex-col md:flex-row gap-4">
@@ -242,6 +232,7 @@ export function CoursesPage({ onNavigate }: CoursesPageProps) {
             <div
               key={course.id}
               className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all cursor-pointer group"
+              onClick={() => onNavigate("course-details", { courseId: course.id })}
             >
               <div className="relative h-48 overflow-hidden">
                 <ImageWithFallback
@@ -251,7 +242,7 @@ export function CoursesPage({ onNavigate }: CoursesPageProps) {
                 />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <button 
-                    onClick={() => onNavigate("course-details")}
+                    onClick={() => onNavigate("course-details", { courseId: course.id })}
                     className="px-6 py-2 bg-white text-sky-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
                   >
                     View Details

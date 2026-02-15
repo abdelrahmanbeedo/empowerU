@@ -7,17 +7,26 @@ import { CourseDetailsPage } from "./components/CourseDetailsPage";
 import { UserDashboard } from "./components/UserDashboard";
 import { AdminPanel } from "./components/AdminPanel";
 
+export type NavigateOptions = { courseId?: number };
+
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
+  const [selectedCourseId, setSelectedCourseId] = useState<number | null>(1);
+
+  const onNavigate = (page: string, options?: NavigateOptions) => {
+    if (options?.courseId != null) setSelectedCourseId(options.courseId);
+    else if (page === "course-details" && selectedCourseId == null) setSelectedCourseId(1);
+    setCurrentPage(page);
+  };
 
   const renderPage = () => {
     switch (currentPage) {
       case "home":
-        return <LandingPage onNavigate={setCurrentPage} />;
+        return <LandingPage onNavigate={onNavigate} />;
       case "courses":
-        return <CoursesPage onNavigate={setCurrentPage} />;
+        return <CoursesPage onNavigate={onNavigate} />;
       case "course-details":
-        return <CourseDetailsPage onNavigate={setCurrentPage} />;
+        return <CourseDetailsPage onNavigate={onNavigate} courseId={selectedCourseId ?? 1} />;
       case "dashboard":
         return <UserDashboard onNavigate={setCurrentPage} />;
       case "admin":

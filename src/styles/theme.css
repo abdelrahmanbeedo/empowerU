@@ -2,6 +2,11 @@
 
 :root {
   --font-size: 16px;
+  /* EmpowerU gradient: blue to teal (soft blob) */
+  --gradient-empoweru: radial-gradient(ellipse 80% 70% at 30% 40%, #3b82f6 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 70% 30%, #06b6d4 0%, transparent 50%),
+    linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(6, 182, 212, 0.2) 100%);
+  --gradient-empoweru-cta: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
   --background: #ffffff;
   --foreground: oklch(0.145 0 0);
   --card: #ffffff;
@@ -79,6 +84,8 @@
 }
 
 @theme inline {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-secondary: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -125,7 +132,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
 
   /**

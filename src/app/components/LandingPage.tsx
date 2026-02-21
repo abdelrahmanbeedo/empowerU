@@ -107,7 +107,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
       name: "Alex Thompson",
       role: "Software Engineer",
       image: "https://images.unsplash.com/photo-1724941407869-f8fb46a3cc38?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMHByb2Zlc3Npb25hbCUyMHNtaWxpbmclMjBwb3J0cmFpdHxlbnwxfHx8fDE3NzA0MDU5MTB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      quote: "EmpowerU transformed my communication skills. The AI feedback is incredibly accurate and helped me land my dream job!",
+      quote: "empowerU transformed my communication skills. The AI feedback is incredibly accurate and helped me land my dream job!",
     },
     {
       name: "Maria Santos",

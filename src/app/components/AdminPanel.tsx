@@ -523,10 +523,10 @@ export function AdminPanel() {
         <div className="w-64 bg-white border-r border-gray-200 min-h-screen">
           <div className="p-6">
             <div className="flex items-center gap-3 mb-8">
-              <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFCMjXMd21cEw/company-logo_200_200/B4EZs9h8MQKoAI-/0/1766263866596/empoweruedu_logo?e=2147483647&v=beta&t=vAIKgUqk74nKGWwFKC7Zg_7PqhnxabN_OlAtSwlezVE" alt="EmpowerU" className="w-10 h-10 rounded-lg object-cover" />
+              <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFCMjXMd21cEw/company-logo_200_200/B4EZs9h8MQKoAI-/0/1766263866596/empoweruedu_logo?e=2147483647&v=beta&t=vAIKgUqk74nKGWwFKC7Zg_7PqhnxabN_OlAtSwlezVE" alt="empowerU" className="w-10 h-10 rounded-lg object-cover" />
               <div>
                 <div className="font-bold text-gray-900">Admin Panel</div>
-                <div className="text-xs text-gray-500">EmpowerU</div>
+                <div className="text-xs text-gray-500">empowerU</div>
               </div>
             </div>
 

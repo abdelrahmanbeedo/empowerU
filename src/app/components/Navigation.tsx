@@ -25,9 +25,9 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             className="flex items-center cursor-pointer"
             onClick={() => onNavigate("home")}
           >
-            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFCMjXMd21cEw/company-logo_200_200/B4EZs9h8MQKoAI-/0/1766263866596/empoweruedu_logo?e=2147483647&v=beta&t=vAIKgUqk74nKGWwFKC7Zg_7PqhnxabN_OlAtSwlezVE" alt="EmpowerU" className="w-10 h-10 rounded-lg object-cover" />
+            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQFCMjXMd21cEw/company-logo_200_200/B4EZs9h8MQKoAI-/0/1766263866596/empoweruedu_logo?e=2147483647&v=beta&t=vAIKgUqk74nKGWwFKC7Zg_7PqhnxabN_OlAtSwlezVE" alt="empowerU" className="w-10 h-10 rounded-lg object-cover" />
             <span className="ml-3 text-2xl font-bold bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg, #2563eb 0%, #0891b2 100%)" }}>
-              EmpowerU
+              empowerU
             </span>
           </div>
 
@@ -46,7 +46,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                 {item.label}
               </button>
             ))}
-            <button className="px-6 py-2 text-white rounded-xl hover:scale-105 transition-transform" style={{ background: "linear-gradient(135deg, #2563eb 0%, #0891b2 100%)" }}>
+            <button onClick={() => onNavigate("login")} className="px-6 py-2 text-white rounded-xl hover:scale-105 transition-transform" style={{ background: "linear-gradient(135deg, #2563eb 0%, #0891b2 100%)" }}>
               Sign In
             </button>
           </div>
@@ -83,7 +83,10 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                 {item.label}
               </button>
             ))}
-            <button className="w-full mt-2 px-4 py-3 bg-gradient-to-r from-sky-600 to-blue-500 text-white rounded-lg hover:opacity-90 transition-opacity">
+            <button onClick={() => {
+                  onNavigate("login");
+                  setIsMobileMenuOpen(false);
+                }} className="w-full mt-2 px-4 py-3 bg-gradient-to-r from-sky-600 to-blue-500 text-white rounded-lg hover:opacity-90 transition-opacity">
               Sign In
             </button>
           </div>

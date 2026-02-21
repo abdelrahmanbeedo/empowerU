@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import { LandingPage } from "./components/LandingPage";
+import { LoginPage } from "./components/LoginPage";
 import { CoursesPage } from "./components/CoursesPage";
 import { CourseDetailsPage } from "./components/CourseDetailsPage";
 import { UserDashboard } from "./components/UserDashboard";
@@ -23,6 +24,8 @@ export default function App() {
     switch (currentPage) {
       case "home":
         return <LandingPage onNavigate={onNavigate} />;
+      case "login":
+        return <LoginPage onNavigate={onNavigate} />;
       case "courses":
         return <CoursesPage onNavigate={onNavigate} />;
       case "course-details":
@@ -38,13 +41,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {currentPage !== "admin" && (
+      {currentPage !== "admin" && currentPage !== "login" && (
         <Navigation currentPage={currentPage} onNavigate={setCurrentPage} />
       )}
       <main className="flex-1">
         {renderPage()}
       </main>
-      {currentPage !== "admin" && <Footer />}
+      {currentPage !== "admin" && currentPage !== "login" && currentPage !== "home" && <Footer />}
     </div>
   );
 }

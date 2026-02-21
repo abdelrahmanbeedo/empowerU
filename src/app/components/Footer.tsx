@@ -12,7 +12,7 @@ export function Footer() {
                 <span className="text-white text-xl font-bold">E</span>
               </div>
               <span className="ml-3 text-xl font-bold text-white">
-                EmpowerU
+                empowerU
               </span>
             </div>
             <p className="text-sm mb-4">
@@ -120,7 +120,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center">
-          <p>&copy; 2026 EmpowerU. All rights reserved.</p>
+          <p>&copy; 2026 empowerU. All rights reserved.</p>
         </div>
       </div>
     </footer>

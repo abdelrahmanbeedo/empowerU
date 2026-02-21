@@ -418,7 +418,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
       <section className="py-20" data-reveal>
         <div className="max-w-4xl mx-auto text-center px-6">
           <h2 className="text-3xl font-bold mb-4">What learners say</h2>
-          <p className="text-slate-600 mb-8 font-secondary">Stories from people who used EmpowerU to change careers and grow.</p>
+          <p className="text-slate-600 mb-8 font-secondary">Stories from people who used empowerU to change careers and grow.</p>
           <div className="grid md:grid-cols-2 gap-6">
             {testimonials.map((t, i) => (
               <div key={i} className="bg-white rounded-xl p-6 shadow">
@@ -433,17 +433,6 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden text-white py-20" data-reveal style={{ background: "var(--gradient-empoweru-cta)" }}>
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")" }} aria-hidden />
-        <div className="relative max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
-          <p className="mb-8 text-white/90 font-secondary">Sign up and begin a guided path to stronger soft skills.</p>
-          <button onClick={() => onNavigate("courses")} className="inline-flex items-center gap-2 bg-white text-sky-700 px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all">
-            Join for free <ArrowRight className="w-4 h-4" />
-          </button>
         </div>
       </section>
     </div>
